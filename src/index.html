@@ -220,14 +220,7 @@
                         forwardToToday.classList.remove('d-none');
                     }
                 }
-                fetch('timetable.json')
-                    .then(r => {
-                        return r.json();
-                    })
-                    .then(d => {
-                        timetable = d;
-                        drawTimeTable();
-                    });
+                drawTimeTable();
             }
 
             function prevDate() {
@@ -257,7 +250,14 @@
                         applyDate();
                     });
                 }
-                applyDate();
+                fetch('timetable.json')
+                    .then(r => {
+                        return r.json();
+                    })
+                    .then(d => {
+                        timetable = d;
+                        applyDate();
+                    });
             });
         </script>
     </body>
