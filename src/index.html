@@ -86,10 +86,11 @@
             </div>
         </div>
         <div class="position-relative fw-bold" id="header" style="text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5); background-color: #333; transition: background-color 0.2s ease;">
-            <div class="text-center text-light" style="font-size: 4.2rem; padding-top: 3rem; padding-bottom: 3rem;">
-                <div class="mx-auto d-inline-block">
-                    <span class="text-end" style="width: 1em;" id="headerMonth">-</span>/<span class="text-start" style="width: 1em;" id="headerDate">-</span>
-                </div>
+            <div class="border text-center text-light" style="font-size: 4.2rem; padding-top: 3rem; padding-bottom: 3rem;">
+                <input type="date" class="invisible d-block" id="inputDate" onchange="updateDate();" style="height: 0; font-size: 0; margin: 0; padding: 0; width: 0;">
+                    <label for="inputDate">
+                        <span id="headerMonth">-</span>/<span id="headerDate">-</span>
+                    </label>
                 <div style="font-size: 2.5rem;" id="headerDay">-</div>
             </div>
             <div class="text-light position-absolute h-100 px-3 d-flex align-items-center" style="font-size: 2rem; top: 0; left: 0;" onclick="prevDate();">&lt;</div>
@@ -188,8 +189,12 @@
                 const headerMonth = document.getElementById('headerMonth');
                 const headerDate = document.getElementById('headerDate');
                 const headerDay = document.getElementById('headerDay');
+                const inputDate = document.getElementById('inputDate');
+                inputDate.value = currentDate.getFullYear() + '-' + ('0' + (currentDate.getMonth() + 1)).slice(-2) + '-' + ('0' + currentDate.getDate()).slice(-2);
                 const backToToday = document.getElementById('backToToday');
                 const forwardToToday = document.getElementById('forwardToToday');
+                backToToday.classList.add('d-none');
+                forwardToToday.classList.add('d-none');
                 const timetableSpinner = document.getElementById('timetableSpinner');
                 timetableSpinner.classList.remove('d-none');
                 const noSche = document.getElementById('noSche');
@@ -206,12 +211,8 @@
                 headerDate.innerText = currentDate.getDate();
                 headerDay.innerText = days[currentDate.getDay()];
                 header.style.backgroundColor = dayColors[currentDate.getDay()];
-                console.log(header.style.backgroundColor);
                 const today = new Date();
-                if (currentDate.getMonth() == today.getMonth() && currentDate.getDate() == today.getDate()) {
-                    backToToday.classList.add('d-none');
-                    forwardToToday.classList.add('d-none');
-                } else {
+                if (currentDate.getMonth() != today.getMonth() || currentDate.getDate() != today.getDate()) {
                     if (currentDate > today) {
                         backToToday.classList.remove('d-none');
                     } else {
@@ -219,6 +220,15 @@
                     }
                 }
                 drawTimeTable();
+            }
+
+            function updateDate() {
+                const inputDate = document.getElementById('inputDate');
+                currentDate.setTime(Date.parse(inputDate.value));
+                if (!currentDate.getTime()) {
+                    currentDate = new Date();
+                }
+                applyDate();
             }
 
             function prevDate() {
