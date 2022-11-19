@@ -2,3 +2,4 @@ pytz
 bs4
 requests
 toml
+jinja2
