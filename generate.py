@@ -3,7 +3,7 @@ import shutil
 import json
 import toml
 import jinja2
-import transit
+# import transit
 
 
 def gen():
@@ -21,8 +21,8 @@ def gen():
     rendered = tpl.render(courses=tt["courses"])
     with open("dist/index.html", "w") as f:
         f.write(rendered)
-    with open("dist/transit.json", "w") as f:
-        json.dump(transit.main(), f)
+    # with open("dist/transit.json", "w") as f:
+    #     json.dump(transit.main(), f)
 
 
 if __name__ == "__main__":
