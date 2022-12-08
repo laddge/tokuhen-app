@@ -14,11 +14,9 @@ def gen():
     os.mkdir("dist")
     with open("src/timetable.toml") as f:
         tt = toml.load(f)
-    with open("dist/timetable.json", "w") as f:
-        json.dump(tt, f)
     with open("src/index.html") as f:
         tpl = jinja2.Template(f.read())
-    rendered = tpl.render(courses=tt["courses"])
+    rendered = tpl.render(courses=tt["courses"], timetable=json.dumps(tt))
     with open("dist/index.html", "w") as f:
         f.write(rendered)
     # with open("dist/transit.json", "w") as f:

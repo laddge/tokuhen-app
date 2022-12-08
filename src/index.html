@@ -132,7 +132,7 @@
         <div class="text-center small text-secondary mt-1">&copy; 2022 <a href="https://github.com/laddge" target="_blank" class="text-reset">Laddge</a></div>
         <script type="text/javascript">
             let currentDate = new Date();
-            let timetable;
+            const timetable = JSON.parse('{{ timetable }}');
 
             function drawTimeTable() {
                 const timetableSpinner = document.getElementById('timetableSpinner');
@@ -269,14 +269,7 @@
                         applyDate();
                     });
                 }
-                fetch('timetable.json')
-                    .then(r => {
-                        return r.json();
-                    })
-                    .then(d => {
-                        timetable = d;
-                        applyDate();
-                    });
+                applyDate();
             });
         </script>
     </body>
