@@ -1,4 +1,5 @@
 import os
+import time
 import shutil
 import json
 import toml
@@ -19,6 +20,12 @@ def gen():
     rendered = tpl.render(courses=tt["courses"], timetable=json.dumps(tt))
     with open("dist/index.html", "w") as f:
         f.write(rendered)
+    with open("src/sw.js") as f:
+        tpl = jinja2.Template(f.read())
+    rendered = tpl.render(time=int(time.time()))
+    with open("dist/sw.js", "w") as f:
+        f.write(rendered)
+    shutil.copy("src/manifest.json", "dist/manifest.json")
     # with open("dist/transit.json", "w") as f:
     #     json.dump(transit.main(), f)
 
