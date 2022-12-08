@@ -13,6 +13,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="特編期間中の時間割などを見ることができるツール">
+        <link rel="manifest" href="manifest.json">
         <meta property="og:title" content="屋高3年特編">
         <meta property="og:description" content="特編期間中の時間割などを見ることができるツール">
         <meta property="og:image" content="https://res.cloudinary.com/laddge/image/upload/f_auto,q_auto,b_auto,c_pad,w_1200,h_630/v1668761016/tokuhen-app/icon.png">
@@ -259,6 +260,9 @@
                 }
                 applyDate();
             });
+
+            navigator.serviceWorker.register('./sw.js')
+                .catch(console.error.bind(console));
         </script>
     </body>
 </html>
