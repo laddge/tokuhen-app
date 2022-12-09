@@ -16,7 +16,7 @@
             "src": "https://res.cloudinary.com/laddge/image/upload/f_auto,q_auto,c_scale,h_512,w_512/v1668761016/tokuhen-app/icon.png",
             "sizes": "512x512",
             "type": "image/png"
-        },
+        }
     ],
     "display": "standalone",
     "start_url": "/"

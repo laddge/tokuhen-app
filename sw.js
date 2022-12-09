@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_NAME = 'cache-1670503818';
+const CACHE_NAME = 'cache-1670559797';
 const urlsToCache = [
     './',
 ];
