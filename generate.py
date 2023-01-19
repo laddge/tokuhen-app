@@ -2,7 +2,7 @@ import os
 import time
 import shutil
 import json
-import toml
+# import toml
 import jinja2
 # import transit
 
@@ -13,11 +13,11 @@ def gen():
     elif os.path.exists("dist"):
         os.remove("dist")
     os.mkdir("dist")
-    with open("src/timetable.toml") as f:
-        tt = toml.load(f)
+    with open("src/timetable.json") as f:
+        tt = json.load(f)
     with open("src/index.html") as f:
         tpl = jinja2.Template(f.read())
-    rendered = tpl.render(courses=tt["courses"], timetable=json.dumps(tt))
+    rendered = tpl.render(timetable=json.dumps(tt))
     with open("dist/index.html", "w") as f:
         f.write(rendered)
     with open("src/sw.js") as f:
